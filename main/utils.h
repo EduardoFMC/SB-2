@@ -109,18 +109,18 @@ int getValueMACRO(string token) {
 //////////////////////// COMEÇO TRAB 2
 
 vector<string> cria_data_section(){
-    vector<string> ret;
+    vector<string> sec;
+    sec.push_back("section .data\n");
 
-
-    return ret;
+    return sec;
 }
 
 
 vector<string> cria_bss_section(){
-    vector<string> ret;
+    vector<string> sec;
+    sec.push_back("section .bss\n");
 
-
-    return ret;
+    return sec;
 }
 
 

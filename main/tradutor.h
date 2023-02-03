@@ -209,28 +209,28 @@ string to_IA32(vector<string> linha){
         //INPUT_C
         case 15:
         {
-            new_line += "EU GOSTO\n";
+            new_line += "SEILA\n";
             break;
         }
 
         //OUTPUT_C
         case 16:
         {
-            new_line += " DO CHEIRO\n";
+            new_line += "misterio da vida\n";
             break;
         }
 
         //INPUT_S
         case 17:
         {
-            new_line += "SEBOSO DE UMA\n";
+            new_line += "SÓ OS ILUMINATE SABEM\n";
             break;
         }
 
         //OUTPUT_S
         case 18:
         {
-            new_line += "PICA\n";
+            new_line += "NUM SEI\n";
             break;
         }
     }
