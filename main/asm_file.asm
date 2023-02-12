@@ -186,3 +186,71 @@ OUTPUT_C:
     mov     eax, 1
     leave
     ret     4
+
+;;;  INPUT_S LABEL, x. Input string em LABEL, com ttamanho maximo x, e escreva o tamanho em byte
+;; que pode ir até x
+INPUT_S:
+
+    enter    0,0
+
+    push    ebx
+    push    ecx
+    push    edx
+
+    read_str_macro [ebp+8], [ebp+12]
+    
+    mov    [size_of_s_input_output_int], eax
+
+    push	DWORD [size_of_s_input_output_int] ; empilha o tamanho em INT
+	push	size_of_s_input_output_str ; empilha onde vai guardar o tamanho em STR
+	call	output_int
+
+    print_str_macro     msg_read_bytes, size_read_bytes
+    print_str_macro     size_of_s_input_output_str, [size_of_s_input_output_int]
+    print_str_macro     msg_bytes, size_bytes_msg
+    print_str_macro     newl, 1
+
+    pop    ebx
+    pop    ecx
+    pop    edx
+
+    mov    eax, [size_of_s_input_output_int]
+
+    leave
+    ret     8
+
+;; OUTPUT STRING. Ouput string e bytes escritos
+OUTPUT_S:
+
+    enter    0,0
+
+    push    ebx
+    push    ecx
+    push    edx
+
+    mov     eax, [ebp+8]
+    call    strlen
+    mov    [size_of_s_input_output_int], eax
+    
+    print_str_macro     [ebp+8], [size_of_s_input_output_int]
+
+    push	DWORD [size_of_s_input_output_int] ; empilha o tamanho em INT
+	push	size_of_s_input_output_str ; empilha onde vai guardar o tamanho em STR
+	call	output_int
+
+    print_str_macro     newl, 1
+
+    ; Foram imprimidos x bytes
+    print_str_macro     msg_print_bytes, size_print_bytes
+    print_str_macro     size_of_s_input_output_str, [size_of_s_input_output_int]
+    print_str_macro     msg_bytes, size_bytes_msg
+    print_str_macro     newl, 1
+
+    pop    ebx
+    pop    ecx
+    pop    edx
+
+    mov    eax, [size_of_s_input_output_int]
+
+    leave
+    ret     8
