@@ -254,3 +254,18 @@ OUTPUT_S:
 
     leave
     ret     8
+
+;;; STR_LEN
+
+strlen:
+	push 	ebx
+	mov 	ebx, eax
+loop:
+	cmp 	byte [eax], 0
+	jz		fim		
+	inc		eax
+	jmp		loop
+
+fim:
+	sub		eax, ebx
+	pop 	ebx
