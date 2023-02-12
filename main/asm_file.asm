@@ -269,3 +269,4 @@ loop:
 fim:
 	sub		eax, ebx
 	pop 	ebx
+	ret
