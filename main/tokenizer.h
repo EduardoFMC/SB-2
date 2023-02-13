@@ -78,7 +78,6 @@ vector<vector<string>> tokenParser(string arquivo){
 
 }
 
-// criar os aqruivos .PRE .MCR
 void createFile(vector<vector<string>> programa,  std::string file_name, std::string extension){
 
     std::ofstream outfile (file_name + extension); // criar arquivo vazio
@@ -96,11 +95,6 @@ void createFile(vector<vector<string>> programa,  std::string file_name, std::st
     outfile.close();
 }
 
-void createFileObj(string objeto, std::string file_name, std::string extension){
 
-    std::ofstream outfile (file_name + extension); // criar arquivo vazio
-    outfile << objeto;
-    outfile.close();
-}
 
 #endif // TOKENIZER_H_INCLUDED

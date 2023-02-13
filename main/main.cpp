@@ -11,13 +11,14 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    //string arquivo = argv[1];
+    std::string arquivo = "equtest.asm";
+    std::string file_name = arquivo.substr(0, arquivo.find_last_of('.'));
 
-    vector<vector<string>> programa = tokenParser("equtest.asm");
+    vector<vector<string>> programa = tokenParser(arquivo);
 
     preprocess(programa);
 
-    montador(programa);
+    montador(programa, file_name);
 
     return 0;
 }

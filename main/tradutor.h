@@ -95,8 +95,6 @@ string to_IA32(vector<string> linha){
     string label;
     string new_line = "";
 
-
-
     if (isLabel(linha[0])){
         new_line += linha[0]+ ' ';
         op = getValue(linha[1], opcodes);
@@ -267,14 +265,16 @@ string to_IA32(vector<string> linha){
     return new_line;
 }
 
-void montador(vector<vector<string>> &programa){
+void montador(vector<vector<string>> &programa, std::string file_name){
     string linha;
     vector<string> vec_linhas;
+    string ch;
 
     vector<string> dot_data = cria_data_section();
     int flag; // flag de quando tiver um STOP
 
-    for ( int i =0 ; i < programa.size();i++){
+    // Forma de saber se o pre processador está correto, printa o programa pre proc
+    /* for ( int i =0 ; i < programa.size();i++){
         for ( int j =0 ; j < programa[i].size();j++){
             cout << programa[i][j];
             cout << " ";
@@ -282,7 +282,7 @@ void montador(vector<vector<string>> &programa){
         cout << "\n";
     }
     cout << "\n";
-    cout << "\n";
+    cout << "\n"; */
 
     for ( int i = 1 ; i < programa.size();i++){
 
@@ -335,18 +335,34 @@ void montador(vector<vector<string>> &programa){
             }
     }
 
+    // criação do arquivo final
+    std::ofstream outfile (file_name + ".S"); // criar arquivo vazio
+
+    std::fstream asm_file; // arquivo com funções em
+    asm_file.open("asm_file.asm", ios::in);
+
+    while (!asm_file.eof()) { // copiando as funções pra inicio do arquivo
+
+        getline(asm_file, ch);
+        outfile << ch << endl;
+    }
+    outfile << "\n\n";
+
+    cout << file_name + ".S";
+
     for ( int i =0 ; i < dot_data.size();i++){
-        cout << dot_data[i] + "\n";
+        outfile << dot_data[i] + "\n";
     }
-    cout << "\n";
+    outfile << "\n";
     for ( int i =0 ; i < dot_bss.size();i++){
-        cout << dot_bss[i] + "\n";
+        outfile << dot_bss[i] + "\n";
     }
-    cout << "\nsection.text\nglobal _start\n\n";
+    outfile << "\nsection.text\nglobal _start\n\n";
     for ( int i =0 ; i < vec_linhas.size();i++){
-        cout << vec_linhas[i];
+        outfile << vec_linhas[i];
     }
 
+    outfile.close();
 }
 
 #endif // TRANSLATOR_H_INCLUDED
