@@ -133,8 +133,6 @@ vector<string> cria_bss_section(){
     sec.push_back("size_of_s_input_output_str     resb 10; tamanho em bytes, só que em str, string vazia pra receber o valor. STR\n");
     sec.push_back("string_int 	resb 	max_int ; aux para com 'x'");
     sec.push_back("num_int 	resd 1 ; aux com x\n");
-    sec.push_back("string_int 			resb 	max_int");
-    sec.push_back("num_int 	resd 1");
 
 
     return sec;

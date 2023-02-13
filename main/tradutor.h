@@ -357,7 +357,7 @@ void montador(vector<vector<string>> &programa, std::string file_name){
     for ( int i =0 ; i < dot_bss.size();i++){
         outfile << dot_bss[i] + "\n";
     }
-    outfile << "\nsection.text\nglobal _start\n\n";
+    outfile << "\nsection .text\nglobal _start\n\n";
     for ( int i =0 ; i < vec_linhas.size();i++){
         outfile << vec_linhas[i];
     }

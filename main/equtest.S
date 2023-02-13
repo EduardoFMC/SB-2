@@ -455,7 +455,6 @@ newl                 dd     0Ah
 n_1                  dd     '1'
 
 DOIS	 dd 2
-LETRA	 db "A"
 
 section .bss
 
@@ -465,15 +464,11 @@ size_of_s_input_output_str     resb 10; tamanho em bytes, só que em str, string 
 string_int 	resb 	max_int ; aux para com 'x'
 num_int 	resd 1 ; aux com x
 
-string_int 			resb 	max_int
-num_int 	resd 1
-OLD_DATA	 resd 3
+OLD_DATA	 resd 1
 NEW_DATA	 resd 1
 TMP_DATA	 resd 1
-CHAR	 resd 1
-STRING	 resd 5
 
-section.text
+section .text
 global _start
 
 push string_int
@@ -488,8 +483,9 @@ mov [NEW_DATA], EAX
 mov ECX, [DOIS]
 imul ECX
 mov [TMP_DATA], EAX
-mov EAX, [OLD_DATA+2]
+mov EAX, [OLD_DATA]
 sub EAX, [TMP_DATA]
+mov [TMP_DATA], EAX
 push dword [TMP_DATA]
 call output_int
 mov EBX, [NEW_DATA]
