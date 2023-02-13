@@ -110,7 +110,17 @@ int getValueMACRO(string token) {
 
 vector<string> cria_data_section(){
     vector<string> sec;
+    sec.push_back("%define max_int 12\n");
     sec.push_back("section .data\n");
+
+    sec.push_back("msg_read_bytes       db     'Foram Lidos '");
+    sec.push_back("size_read_bytes      EQU    $-msg_read_bytes \n");
+    sec.push_back("msg_print_bytes      db     'Foram Escritos '");
+    sec.push_back("size_print_bytes     EQU    $-msg_print_bytes\n");
+    sec.push_back("msg_bytes            db     ' Bytes'");
+    sec.push_back("size_bytes_msg       EQU    $-msg_bytes\n");
+    sec.push_back("newl                 dd     0Ah");
+    sec.push_back("n_1                  dd     '1'\n");
 
     return sec;
 }
@@ -119,6 +129,13 @@ vector<string> cria_data_section(){
 vector<string> cria_bss_section(){
     vector<string> sec;
     sec.push_back("section .bss\n");
+    sec.push_back("size_of_s_input_output_int     resd 10 ; var auxiliar, para sabermos quantos bytes imprimir. INT");
+    sec.push_back("size_of_s_input_output_str     resb 10; tamanho em bytes, só que em str, string vazia pra receber o valor. STR\n");
+    sec.push_back("string_int 	resb 	max_int ; aux para com 'x'");
+    sec.push_back("num_int 	resd 1 ; aux com x\n");
+    sec.push_back("string_int 			resb 	max_int");
+    sec.push_back("num_int 	resd 1");
+
 
     return sec;
 }
