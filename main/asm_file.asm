@@ -52,14 +52,14 @@ continua:
 	push 	EAX
 	and 	EAX,0 ;soma começa zerada
 
-passa:
+passa_input:
 	push	EDX ;edx é alterado com mul, então precisa salvar o tamanho da string
 	imul 	EBX
 	add 	AL,[EDI]
 	sub 	AL,0x30
 	pop 	EDX
 	inc		EDI
-	loop 	passa
+	loop 	passa_input
 	imul 	DWORD [EBP-4]
 
 	mov 	[num_int],eax
@@ -145,16 +145,13 @@ output_int:
 	and		ECX,0 ;ecx = iterador
 	cmp		[EBP-4],ECX
 	jl		negativo
-	jmp		passa
+	jmp		passa_output
 
 negativo:
-	;inc 	ecx
-	;mov 	edx,"-"
-	;push 	edx
 	mov 	edx,-1
 	imul 	edx
 
-passa:
+passa_output:
 	and		edx,0
 	idiv	ebx
 
@@ -163,7 +160,7 @@ passa:
 
 	inc		ecx ;incrementa ecx para depois desempilhar
 	cmp 	eax,0
-	jne		passa
+	jne		passa_output
 
 	and		ebx,0
 
@@ -206,48 +203,6 @@ digitos:
     print_str_macro     newl, 1
 
     pop 	EAX
-	pop 	EDX
-	pop 	ECX
-	pop 	EBX
-
-	leave
-	ret		8
-
-get_pos_int_str:
-	enter	0,0
-
-	push	EBX
-	push	ECX
-	push	EDX
-
-	mov		EDI,[EBP+8] ;edi = string vazia
-	mov		EAX,[EBP+12] ;eax = número
-	mov		EBX,10 ;ebx = divisor
-
-	and		ECX,0 ;ecx = iterador
-
-passa_int_str:
-	and		edx,0
-	idiv	ebx
-
-	add		edx,0x30
-	push 	EDX
-
-	inc		ecx ;incrementa ecx para depois desempilhar
-	cmp 	eax,0
-	jne		passa_int_str
-
-	and		ebx,0
-
-digitos_int_str:
-	pop		edx
-	mov 	[edi],edx
-	inc		edi
-
-	inc		ebx
-	cmp 	ebx,ecx
-	jne 	digitos_int_str
-
 	pop 	EDX
 	pop 	ECX
 	pop 	EBX
