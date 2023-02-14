@@ -7,6 +7,10 @@ O trabalho implementa um tradutor em C++ da linguagem hipotética vista em aula 
 ## Especificações ##
 O sistema operacional utilizado no desenvolvimento do projeto foi Ubuntu 22.04.1 LTS.
 
+## Funções de leitura e escrita em IA-32 ##
+
+As funções feitas para leitura e escrita de caracteres, strings e números inteiros podem ser encontradas no arquivo asm_file.asm
+
 ## Execução ##
 
 ### Compilar o montador ###
@@ -31,7 +35,7 @@ Com o arquivo objeto traduzido, obtemos o filename.S, que pode ser compilado via
 
 Agora, é preciso ligar o arquivo de saída.
 
-<code>.ld -m elf_i386 output output.o</code>
+<code>ld -m elf_i386 -o output output.o</code>
 
 ### Executar o código ###
 
