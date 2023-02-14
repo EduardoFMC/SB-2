@@ -110,7 +110,6 @@ int getValueMACRO(string token) {
 
 vector<string> cria_data_section(){
     vector<string> sec;
-    sec.push_back("%define max_int 12\n");
     sec.push_back("section .data\n");
 
     sec.push_back("msg_read_bytes       db     'Foram Lidos '");

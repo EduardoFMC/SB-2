@@ -1,3 +1,6 @@
+
+%define max_int 12
+
 ;macro para ler uma string
 %macro read_str_macro 2
 mov eax, 3

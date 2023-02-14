@@ -1,3 +1,6 @@
+
+%define max_int 12
+
 ;macro para ler uma string
 %macro read_str_macro 2
 mov eax, 3
@@ -99,6 +102,35 @@ get_pos_int_str:
 
 	and		ECX,0 ;ecx = iterador
 
+passa_int_str:
+	and		edx,0
+	idiv	ebx
+
+	add		edx,0x30
+	push 	EDX
+
+	inc		ecx ;incrementa ecx para depois desempilhar
+	cmp 	eax,0
+	jne		passa_int_str
+
+	and		ebx,0
+
+digitos_int_str:
+	pop		edx
+	mov 	[edi],edx
+	inc		edi
+
+	inc		ebx
+	cmp 	ebx,ecx
+	jne 	digitos_int_str
+
+	pop 	EDX
+	pop 	ECX
+	pop 	EBX
+
+	leave
+	ret		8
+
 ;;;; OUTPUT. OUTPUT INT
 ;; Pode ser utilizado como int -> str
 output_int:
@@ -174,48 +206,6 @@ digitos:
     print_str_macro     newl, 1
 
     pop 	EAX
-	pop 	EDX
-	pop 	ECX
-	pop 	EBX
-
-	leave
-	ret		8
-
-get_pos_int_str:
-	enter	0,0
-
-	push	EBX
-	push	ECX
-	push	EDX
-
-	mov		EDI,[EBP+8] ;edi = string vazia
-	mov		EAX,[EBP+12] ;eax = número
-	mov		EBX,10 ;ebx = divisor
-
-	and		ECX,0 ;ecx = iterador
-
-passa_int_str:
-	and		edx,0
-	idiv	ebx
-
-	add		edx,0x30
-	push 	EDX
-
-	inc		ecx ;incrementa ecx para depois desempilhar
-	cmp 	eax,0
-	jne		passa_int_str
-
-	and		ebx,0
-
-digitos_int_str:
-	pop		edx
-	mov 	[edi],edx
-	inc		edi
-
-	inc		ebx
-	cmp 	ebx,ecx
-	jne 	digitos_int_str
-
 	pop 	EDX
 	pop 	ECX
 	pop 	EBX
@@ -406,8 +396,6 @@ all_digits:
 	ret		8
 
 
-%define max_int 12
-
 section .data
 
 msg_read_bytes       db     'Foram Lidos '
@@ -438,13 +426,14 @@ TMP_DATA	 resd 1
 
 section .text
 global _start
+_start:
 
 push string_int
 call input_int
 mov EAX, [num_int]
 mov [OLD_DATA], EAX
 mov EAX, [OLD_DATA]
-L1: mov ECX, [DIV]
+L1: mov ECX, [DOIS]
 cdq
 idiv ECX
 mov [NEW_DATA], EAX

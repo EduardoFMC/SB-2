@@ -100,7 +100,7 @@ string to_IA32(vector<string> linha){
         op = getValue(linha[1], opcodes);
 
         if (op != 14){ // Se for sTOP nao tem outra label na frente
-            label = linha[1];
+            label = linha[2];
         }
 
     } else {
@@ -357,7 +357,7 @@ void montador(vector<vector<string>> &programa, std::string file_name){
     for ( int i =0 ; i < dot_bss.size();i++){
         outfile << dot_bss[i] + "\n";
     }
-    outfile << "\nsection .text\nglobal _start\n\n";
+    outfile << "\nsection .text\nglobal _start\n_start:\n\n";
     for ( int i =0 ; i < vec_linhas.size();i++){
         outfile << vec_linhas[i];
     }
