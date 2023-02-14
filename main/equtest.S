@@ -414,6 +414,8 @@ DOIS	 dd 2
 
 section .bss
 
+string      resb 10
+
 size_of_s_input_output_int     resd 10 ; var auxiliar, para sabermos quantos bytes imprimir. INT
 size_of_s_input_output_str     resb 10; tamanho em bytes, só que em str, string vazia pra receber o valor. STR
 
@@ -444,6 +446,7 @@ mov EAX, [OLD_DATA]
 sub EAX, [TMP_DATA]
 mov [TMP_DATA], EAX
 push dword [TMP_DATA]
+push string
 call output_int
 mov EBX, [NEW_DATA]
 mov [OLD_DATA], EBX

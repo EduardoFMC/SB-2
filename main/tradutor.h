@@ -208,6 +208,7 @@ string to_IA32(vector<string> linha){
         case 13:
         {
             new_line += "push dword [" + label + "]\n";
+            new_line += "push string\n";
             new_line += "call output_int\n";
             break;
         }

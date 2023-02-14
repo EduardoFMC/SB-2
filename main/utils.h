@@ -128,6 +128,7 @@ vector<string> cria_data_section(){
 vector<string> cria_bss_section(){
     vector<string> sec;
     sec.push_back("section .bss\n");
+    sec.push_back("string      resb 10\n");
     sec.push_back("size_of_s_input_output_int     resd 10 ; var auxiliar, para sabermos quantos bytes imprimir. INT");
     sec.push_back("size_of_s_input_output_str     resb 10; tamanho em bytes, só que em str, string vazia pra receber o valor. STR\n");
     sec.push_back("string_int 	resb 	max_int ; aux para com 'x'");
