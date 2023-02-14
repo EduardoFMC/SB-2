@@ -72,6 +72,7 @@ passa_input:
 	pop 	ECX
 	pop 	EBX
 
+	sub		eax,1
     mov   	[size_of_s_input_output_int], eax
     push 	eax
 
