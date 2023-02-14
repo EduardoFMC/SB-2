@@ -421,16 +421,20 @@ size_of_s_input_output_str     resb 10; tamanho em bytes, só que em str, string 
 string_int 	resb 	max_int ; aux para com 'x'
 num_int 	resd 1 ; aux com x
 
-TEST_CHAR	 resb 1
+TEST_STRING	 resb 5
+TEST_STRING_size	 resd 10
 
 section .text
 global _start
 _start:
 
-push TEST_CHAR
-call INPUT_C
-push TEST_CHAR
-call OUTPUT_C
+push TEST_STRING_size
+push 5
+push TEST_STRING
+call INPUT_S
+push TEST_STRING_size
+push TEST_STRING
+call OUTPUT_S
 mov EAX, 1
 mov EBX, 0
 int 80h
