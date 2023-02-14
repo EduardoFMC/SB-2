@@ -410,7 +410,6 @@ size_bytes_msg       EQU    $-msg_bytes
 newl                 dd     0Ah
 n_1                  dd     '1'
 
-DOIS	 dd 2
 
 section .bss
 
@@ -422,37 +421,16 @@ size_of_s_input_output_str     resb 10; tamanho em bytes, só que em str, string 
 string_int 	resb 	max_int ; aux para com 'x'
 num_int 	resd 1 ; aux com x
 
-OLD_DATA	 resd 1
-NEW_DATA	 resd 1
-TMP_DATA	 resd 1
+TEST_CHAR	 resb 1
 
 section .text
 global _start
 _start:
 
-push string_int
-call input_int
-mov EAX, [num_int]
-mov [OLD_DATA], EAX
-mov EAX, [OLD_DATA]
-L1: mov ECX, [	DOIS]
-cdq
-idiv ECX
-mov [NEW_DATA], EAX
-mov ECX, [DOIS]
-imul ECX
-mov [TMP_DATA], EAX
-mov EAX, [OLD_DATA]
-sub EAX, [TMP_DATA]
-mov [TMP_DATA], EAX
-push dword [TMP_DATA]
-push string
-call output_int
-mov EBX, [NEW_DATA]
-mov [OLD_DATA], EBX
-mov EAX, [OLD_DATA]
-CMP EAX, 0
-JG L1
+push TEST_CHAR
+call INPUT_C
+push TEST_CHAR
+call OUTPUT_C
 mov EAX, 1
 mov EBX, 0
 int 80h
